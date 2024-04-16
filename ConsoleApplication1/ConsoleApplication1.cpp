@@ -1,7 +1,11 @@
 #include <iostream>
 using std::string;
 
-class Employee {
+class AbstractEmployee {
+    virtual void AskForPromotion()=0;
+};
+
+class Employee:AbstractEmployee {
 private:
 	string Name;
 	string Company;
@@ -20,50 +24,66 @@ public:
 		Age = age;
 	}
 
-	//setter
+    //name setter&getter
 	void setName(string name) {
 		Name = name;
 	}
-	//getter
 	string getName() {
 		return Name;
 	}
 
-	//setter
+	//company setter&getter
 	void setCompany(string company) {
 		Company = company;
 	}
-	//getter
 	string getCompany() {
 		return Company;
 	}
 
-	//setter
+	//age setter&getter
 	void setAge(int age) {
 		if (age >= 18)
 		Age = age;
 	}
-	//getter
 	int getAge() {
 		return Age;
 	}
+	
+
+void AskForPromotion() {
+    if(Age>=30)
+    std::cout << Name << " got promoted!" << std::endl;
+    else
+        std::cout << Name << ", sorry NO promotion for you!" << std::endl;
+}
 
 };
 
 int main() {
-	Employee employee1 = Employee("Ravi", "ABCCompany", 27);
-	/*employee1.Name = "Ravi";
+	Employee employee1 = Employee("Ravi", "ABCCompany", 30);
+	Employee employee2 = Employee("Ruy", "Amazon", 28);
+	Employee employee3 = Employee("Michael", "Google", 25);
+
+	/*
+    employee1.Name = "Ravi";
 	employee1.Company = "ABCCompany";
-	employee1.Age = 27;*/
+	employee1.Age = 27;
+
+
+
+
 	employee1.IntroduceYourself();
-
-	Employee employee2 = Employee("David", "Microsoft", 36);
 	employee2.IntroduceYourself();
-
-	Employee employee3 = Employee("Ron", "Google", 38);
 	employee3.IntroduceYourself();
 
-	//testing setters and getters
+    
+	testing setters and getters
 	employee1.setAge(16);
 	std::cout << employee1.getName() << " is " << employee1.getAge() << " years old." << std::endl;
+    */
+
+   employee1.AskForPromotion();
+   employee2.AskForPromotion();
+   employee3.AskForPromotion();
+
 }

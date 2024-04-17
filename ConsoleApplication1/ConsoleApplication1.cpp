@@ -40,25 +40,27 @@ public:
 		return Age;
 	}
 
-	void IntroduceYourself() {
-		std::cout << "Name - " << Name << std::endl;
-		std::cout << "Company - " << Company << std::endl;
-		std::cout << "Age - " << Age << std::endl;
-	}
-
 	Employee(string name, string company, int age) {
 		Name = name;
 		Company = company;
 		Age = age;
 	}
 
-
+	void IntroduceYourself() {
+		std::cout << "Name - " << Name << std::endl;
+		std::cout << "Company - " << Company << std::endl;
+		std::cout << "Age - " << Age << std::endl;
+	}
 
 	void AskForPromotion() {
 		if (Age >= 30)
 			std::cout << Name << " got promoted!" << std::endl;
 		else
 			std::cout << Name << ", sorry NO promotion for you!" << std::endl;
+	}
+
+	virtual void Work() {
+		std::cout << Name << " is checking e-mail, task backlog, performing tasks..." << std::endl;
 	}
 
 };
@@ -71,7 +73,11 @@ public:
 		FavProgrammingLanguage = favProgrammingLanguage;
 	}
 	void FixBug() {
-		std::cout << Name << " fixed bug using " << FavProgrammingLanguage << std::endl;
+		std::cout << Name << " fixed bug using " << FavProgrammingLanguage << "." << std::endl;
+	}
+
+	void Work() {
+		std::cout << Name << " is writing " << FavProgrammingLanguage << " code." << std::endl;
 	}
 };
 
@@ -85,6 +91,9 @@ public:
 		std::cout << Name << " is preparing " << Subject << " lesson." << std::endl;
 	}
 
+	void Work() {
+		std::cout << Name << " teaching " << Subject << " class." << std::endl;
+	}
 };
 
 int main() {
@@ -92,15 +101,26 @@ int main() {
 	Employee employee2 = Employee("Ruy", "Amazon", 28);
 	Employee employee3 = Employee("Michael", "Google", 25);
 
-	Developer d = Developer("Ravi", "Microsoft", 30, "C#.");
-	d.FixBug();
-	d.FixBug();
-	d.FixBug();
-	d.AskForPromotion();
+	Developer d = Developer("Ravi", "Microsoft", 30, "C#");
+	/*d.FixBug();
+	d.AskForPromotion();*/
 
 	Teacher t = Teacher("John", "UFBA", 30, "History");
-	t.PrepareLesson();
-	t.AskForPromotion();
+	/*t.PrepareLesson();
+	t.AskForPromotion();*/
+
+	d.Work();
+	t.Work();
+
+	 //the most common use of polymorphism is when a
+	//parent class reference is used to refer to a child class object
+
+	Employee* e1 = &d;
+	Employee* e2 = &t;
+	
+
+	e1->Work();
+	e2->Work();
 
 
 	/*
